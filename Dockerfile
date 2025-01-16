@@ -43,13 +43,9 @@ RUN sudo apt-get update && sudo apt-get upgrade -y && \
     rm -rf iqtree-* && \
 
     # install MAFFT
-    wget -qO- "https://mafft.cbrc.jp/alignment/software/mafft-7.525-without-extensions-src.tgz" | tar -zx && \
-    cd mafft-*/core && \
-    make clean && \
-    make && \
-    sudo make install && \
-    cd ../.. && \
-    rm -rf mafft-* && \
+    wget "https://mafft.cbrc.jp/alignment/software/mafft_7.526-1_amd64.deb" && \
+    sudo dpkg -i mafft_*.deb && \
+    rm -rf mafft* && \
 
     # install Minimap2
     wget -qO- "https://github.com/lh3/minimap2/releases/download/v2.28/minimap2-2.28_x64-linux.tar.bz2" | tar -xj && \
