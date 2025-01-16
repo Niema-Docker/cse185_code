@@ -18,11 +18,9 @@ RUN sudo apt-get update && sudo apt-get upgrade -y && \
     rm -rf htslib-* && \
 
     # install Bowtie2
-    wget -qO- "https://github.com/BenLangmead/bowtie2/archive/refs/tags/v2.5.4.tar.gz" | tar -zx && \
-    cd bowtie2-* && \
-    make && \
-    sudo make install && \
-    cd .. && \
+    wget "https://github.com/BenLangmead/bowtie2/releases/download/v2.5.4/bowtie2-2.5.4-linux-x86_64.zip" && \
+    unzip bowtie2-*.zip && \
+    sudo mv bowtie2-*/bowtie2-* /usr/local/bin/ && \
     rm -rf bowtie2-* && \
 
     # install BWA
