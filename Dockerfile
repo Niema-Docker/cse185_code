@@ -57,6 +57,10 @@ RUN sudo apt-get update && sudo apt-get upgrade -y && \
     sudo mv newick-utils-*/src/nw_* /usr/local/bin/ && \
     rm -rf newick-utils-* && \
 
+    # install Quack
+    sudo wget -O /usr/local/bin/quack "https://github.com/IGBB/quack/releases/download/1.2.1/linux.quack" && \
+    sudo chmod a+x /usr/local/bin/quack && \
+
     # install SPAdes
     wget -qO- "https://github.com/ablab/spades/releases/download/v4.0.0/SPAdes-4.0.0-Linux.tar.gz" | tar -zx && \
     sudo mv SPAdes-*/bin/* /usr/local/bin/ && \
