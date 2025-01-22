@@ -61,6 +61,13 @@ RUN sudo apt-get update && sudo apt-get upgrade -y && \
     sudo wget -O /usr/local/bin/quack "https://github.com/IGBB/quack/releases/download/1.2.1/linux.quack" && \
     sudo chmod a+x /usr/local/bin/quack && \
 
+    # install QUAST
+    wget -qO- "https://github.com/ablab/quast/releases/download/quast_5.3.0/quast-5.3.0.tar.gz" | tar -zx && \
+    cd quast-* && \
+    sudo python3 setup.py install && \
+    cd .. && \
+    sudo rm -rf quast-* && \
+
     # install SPAdes
     wget -qO- "https://github.com/ablab/spades/releases/download/v4.0.0/SPAdes-4.0.0-Linux.tar.gz" | tar -zx && \
     sudo mv SPAdes-*/bin/* /usr/local/bin/ && \
