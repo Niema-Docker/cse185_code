@@ -31,6 +31,10 @@ RUN sudo apt-get update && sudo apt-get upgrade -y && \
     cd .. && \
     rm -rf bwa-* && \
 
+    # install fastp
+    sudo wget -O /usr/local/bin/fastp "http://opengene.org/fastp/fastp.0.24.0" && \
+    sudo chmod a+x /usr/local/bin/fastp && \
+
     # install FastTree
     wget "http://www.microbesonline.org/fasttree/FastTree.c" && \
     gcc -DUSE_DOUBLE -DOPENMP -fopenmp -O3 -finline-functions -funroll-loops -Wall -o FastTree FastTree.c -lm && \
