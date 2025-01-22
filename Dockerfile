@@ -9,7 +9,7 @@ RUN sudo apt-get update && sudo apt-get upgrade -y && \
     sudo -H pip3 install --break-system-packages phylo-treetime && \
 
     # install htslib
-    wget -qO- "https://github.com/samtools/htslib/releases/download/1.20/htslib-1.20.tar.bz2" | tar -xj && \
+    wget -qO- "https://github.com/samtools/htslib/releases/download/1.21/htslib-1.21.tar.bz2" | tar -xj && \
     cd htslib-* && \
     ./configure && \
     make && \
