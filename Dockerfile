@@ -61,6 +61,10 @@ RUN sudo apt-get update && sudo apt-get upgrade -y && \
     sudo mv newick-utils-*/src/nw_* /usr/local/bin/ && \
     rm -rf newick-utils-* && \
 
+    # install Prodigal
+    sudo wget -O /usr/local/bin/prodigal "https://github.com/hyattpd/Prodigal/releases/download/v2.6.3/prodigal.linux" && \
+    sudo chmod a+x /usr/local/bin/prodigal && \
+
     # install Quack
     sudo wget -O /usr/local/bin/quack "https://github.com/IGBB/quack/releases/download/1.2.1/linux.quack" && \
     sudo chmod a+x /usr/local/bin/quack && \
