@@ -6,7 +6,7 @@ RUN sudo apt-get update && sudo apt-get upgrade -y && \
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib && \
 
     # install Python packages
-    sudo -H pip3 install --break-system-packages phylo-treetime && \
+    sudo -H pip3 install --break-system-packages networkx phylo-treetime treeswift && \
 
     # install htslib
     wget -qO- "https://github.com/samtools/htslib/releases/download/1.21/htslib-1.21.tar.bz2" | tar -xj && \
@@ -46,6 +46,15 @@ RUN sudo apt-get update && sudo apt-get upgrade -y && \
     sudo mv iqtree-*/bin/iqtree2 /usr/local/bin/iqtree2 && \
     rm -rf iqtree-* && \
 
+    # install kallisto
+    wget -qO- "https://github.com/pachterlab/kallisto/releases/download/v0.51.1/kallisto_linux-v0.51.1.tar.gz" | tar -zx && \
+    sudo mv kallisto/kallisto /usr/local/bin/kallisto && \
+    rm -rf kallisto && \
+
+    # install LSD2
+    sudo wget -O /usr/local/bin/lsd2 "https://github.com/tothuhien/lsd2/releases/download/v.2.4.1/lsd2_unix" && \
+    sudo chmod a+x /usr/local/bin/lsd2 && \
+
     # install MAFFT
     wget "https://mafft.cbrc.jp/alignment/software/mafft_7.526-1_amd64.deb" && \
     sudo dpkg -i mafft_*.deb && \
@@ -76,11 +85,35 @@ RUN sudo apt-get update && sudo apt-get upgrade -y && \
     cd .. && \
     sudo rm -rf quast-* && \
 
+    # install Salmon
+    wget -qO- "https://github.com/COMBINE-lab/salmon/archive/refs/tags/v1.10.1.tar.gz" | tar -zx && \
+    cd salmon-* && \
+    cmake -DCMAKE_INSTALL_PREFIX=/usr/local/ . && \
+    make && \
+    sudo make install && \
+    cd .. && \
+    rm -rf salmon-* && \
+
     # install SPAdes
     wget -qO- "https://github.com/ablab/spades/releases/download/v4.0.0/SPAdes-4.0.0-Linux.tar.gz" | tar -zx && \
     sudo mv SPAdes-*/bin/* /usr/local/bin/ && \
     sudo mv SPAdes-*/share/* /usr/local/share/ && \
     rm -rf SPAdes-* && \
+
+    # install STAR
+    wget "https://github.com/alexdobin/STAR/releases/download/2.7.11b/STAR_2.7.11b.zip" && \
+    unzip STAR_*.zip && \
+    sudo mv STAR_*/Linux_x86_64_static/* /usr/local/bin/ && \
+    rm -rf STAR_* && \
+
+    # install tn93
+    wget -qO- "https://github.com/veg/tn93/archive/refs/tags/v1.0.14.tar.gz" | tar -zx && \
+    cd tn93-* && \
+    cmake -DCMAKE_INSTALL_PREFIX=/usr/local/ . && \
+    make && \
+    sudo make install && \
+    cd .. && \
+    rm -rf tn93-* && \
 
     # install ViralConsensus
     wget -qO- "https://github.com/niemasd/ViralConsensus/archive/refs/tags/0.0.6.tar.gz" | tar -zx && \
