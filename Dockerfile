@@ -58,6 +58,11 @@ RUN sudo apt-get update && sudo apt-get upgrade -y && \
     sudo mv kallisto/kallisto /usr/local/bin/kallisto && \
     rm -rf kallisto && \
 
+    # install LoFreq
+    wget -qO- "https://github.com/CSB5/lofreq/raw/refs/heads/master/dist/lofreq_star-2.1.5_linux-x86-64.tgz" | tar -zx && \
+    sudo mv lofreq_star-*/bin/* /usr/local/bin/ && \
+    rm -rf lofreq_star-* && \
+
     # install LSD2
     sudo wget -O /usr/local/bin/lsd2 "https://github.com/tothuhien/lsd2/releases/download/v.2.4.1/lsd2_unix" && \
     sudo chmod a+x /usr/local/bin/lsd2 && \
