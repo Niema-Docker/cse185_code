@@ -97,6 +97,15 @@ RUN sudo apt-get update && sudo apt-get upgrade -y && \
     cd .. && \
     sudo rm -rf quast-* && \
 
+    # install RAxML-NG
+    mkdir -p raxml && \
+    cd raxml && \
+    wget "https://github.com/amkozlov/raxml-ng/releases/download/1.2.2/raxml-ng_v1.2.2_linux_x86_64.zip" && \
+    unzip raxml*.zip && \
+    sudo mv raxml-ng /usr/local/bin/ && \
+    cd .. && \
+    rm -rf raxml && \
+
     # install Salmon
     wget -qO- "https://github.com/COMBINE-lab/salmon/archive/refs/tags/v1.10.1.tar.gz" | tar -zx && \
     cd salmon-* && \
