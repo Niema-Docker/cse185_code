@@ -2,7 +2,7 @@ FROM codercom/code-server:latest
 MAINTAINER Niema Moshiri <niemamoshiri@gmail.com>
 RUN sudo apt-get update && sudo apt-get upgrade -y && \
     # install general dependencies
-    sudo apt-get install -y --no-install-recommends bison bzip2 cmake flex libboost-all-dev libbz2-dev libcurl4-openssl-dev libeigen3-dev liblzma-dev g++ gcc git make python-is-python3 python3 python3-pip unzip zlib1g-dev && \
+    sudo apt-get install -y --no-install-recommends bison bzip2 cmake flex libboost-all-dev libbz2-dev libcurl4-openssl-dev libeigen3-dev liblzma-dev g++ gcc git make perl-doc python-is-python3 python3 python3-pip unzip zlib1g-dev && \
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib && \
 
     # install Python packages
@@ -110,6 +110,14 @@ RUN sudo apt-get update && sudo apt-get upgrade -y && \
     sudo mv raxml-ng /usr/local/bin/ && \
     cd .. && \
     rm -rf raxml && \
+
+    # install RSEM
+    wget -qO- "https://github.com/deweylab/RSEM/archive/refs/tags/v1.3.3.tar.gz" | tar -zx && \
+    cd RSEM-* && \
+    make && \
+    sudo make install && \
+    cd .. && \
+    rm -rf RSEM-* && \
 
     # install Salmon
     wget -qO- "https://github.com/COMBINE-lab/salmon/archive/refs/tags/v1.10.1.tar.gz" | tar -zx && \
