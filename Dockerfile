@@ -6,7 +6,7 @@ RUN sudo apt-get update && sudo apt-get upgrade -y && \
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib && \
 
     # install Python packages
-    sudo -H pip3 install --break-system-packages networkx niemads phylo-treetime treeswift && \
+    sudo -H pip3 install --break-system-packages networkx niemads phylo-treetime scikit-learn treeswift && \
 
     # install htslib
     wget -qO- "https://github.com/samtools/htslib/releases/download/1.21/htslib-1.21.tar.bz2" | tar -xj && \
