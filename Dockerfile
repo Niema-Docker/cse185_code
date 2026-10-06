@@ -1,7 +1,7 @@
 FROM codercom/code-server:latest
 RUN sudo apt-get update && sudo apt-get upgrade -y && \
     # install general dependencies
-    sudo apt-get install -y --no-install-recommends bc bison bzip2 cmake flex git libboost-all-dev libbz2-dev libcurl4-openssl-dev libeigen3-dev liblzma-dev g++ gcc git make perl-doc python-is-python3 python3 python3-pip unzip xz-utils zlib1g-dev && \
+    sudo apt-get install -y --no-install-recommends bc bison bzip2 cmake flex git libboost-all-dev libbz2-dev libcurl4-openssl-dev libeigen3-dev liblzma-dev g++ gcc git make perl-doc python-is-python3 python3 python3-pip time unzip wget xz-utils zlib1g-dev && \
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib && \
 
     # install Python packages
