@@ -1,5 +1,4 @@
 FROM codercom/code-server:latest
-MAINTAINER Niema Moshiri <niemamoshiri@gmail.com>
 RUN sudo apt-get update && sudo apt-get upgrade -y && \
     # install general dependencies
     sudo apt-get install -y --no-install-recommends bc bison bzip2 cmake flex libboost-all-dev libbz2-dev libcurl4-openssl-dev libeigen3-dev liblzma-dev g++ gcc git make perl-doc python-is-python3 python3 python3-pip unzip zlib1g-dev && \
@@ -9,7 +8,7 @@ RUN sudo apt-get update && sudo apt-get upgrade -y && \
     sudo -H pip3 install --break-system-packages networkx niemads phylo-treetime scikit-learn treeswift && \
 
     # install htslib
-    wget -qO- "https://github.com/samtools/htslib/releases/download/1.21/htslib-1.21.tar.bz2" | tar -xj && \
+    wget -qO- "https://github.com/samtools/htslib/releases/download/1.24/htslib-1.24.tar.bz2" | tar -xj && \
     cd htslib-* && \
     ./configure && \
     make && \
@@ -18,13 +17,13 @@ RUN sudo apt-get update && sudo apt-get upgrade -y && \
     rm -rf htslib-* && \
 
     # install Bowtie2
-    wget "https://github.com/BenLangmead/bowtie2/releases/download/v2.5.4/bowtie2-2.5.4-linux-x86_64.zip" && \
+    wget "https://github.com/BenLangmead/bowtie2/releases/download/v2.5.5/bowtie2-2.5.5-linux-x86_64.zip" && \
     unzip bowtie2-*.zip && \
     sudo mv bowtie2-*/bowtie2* /usr/local/bin/ && \
     rm -rf bowtie2-* && \
 
     # install BWA
-    wget -qO- "https://github.com/lh3/bwa/archive/refs/tags/v0.7.18.tar.gz" | tar -zx && \
+    wget -qO- "https://github.com/lh3/bwa/archive/refs/tags/v0.7.19.tar.gz" | tar -zx && \
     cd bwa-* && \
     make && \
     sudo mv bwa /usr/local/bin/bwa && \
@@ -32,7 +31,7 @@ RUN sudo apt-get update && sudo apt-get upgrade -y && \
     rm -rf bwa-* && \
 
     # install fastp
-    sudo wget -O /usr/local/bin/fastp "http://opengene.org/fastp/fastp.0.24.0" && \
+    sudo wget -O /usr/local/bin/fastp "http://opengene.org/fastp/fastp.1.3.7" && \
     sudo chmod a+x /usr/local/bin/fastp && \
 
     # install FastTree
@@ -42,24 +41,25 @@ RUN sudo apt-get update && sudo apt-get upgrade -y && \
     rm FastTree.c && \
 
     # install freebayes
-    wget -qO- "https://github.com/freebayes/freebayes/releases/download/v1.3.6/freebayes-1.3.6-linux-amd64-static.gz" | gunzip > freebayes && \
+    wget -qO- "https://github.com/freebayes/freebayes/releases/download/v1.3.10/freebayes-1.3.10-linux-amd64-static.gz" | gunzip > freebayes && \
     chmod a+x freebayes && \
     sudo mv freebayes /usr/local/bin/ && \
 
     # install HISAT2
-    wget -O hisat2.zip "https://cloud.biohpc.swmed.edu/index.php/s/hisat2-220-Linux_x86_64/download" && \
-    unzip hisat2*.zip && \
-    sudo mv hisat2-*/hisat2* /usr/local/bin/ && \
-    sudo mv hisat2-*/*.py /usr/local/bin/ && \
-    rm -rf hisat2* && \
+    wget -qO- "https://github.com/DaehwanKimLab/hisat2/archive/refs/tags/v2.2.3.tar.gz" | tar -zx && \
+    cd hisat2-* && \
+    make && \
+    sudo mv hisat2 hisat2-* *.py /usr/local/bin/ && \
+    cd .. && \
+    rm -rf hisat2-* && \
 
     # install IQ-TREE 2
-    wget -qO- "https://github.com/iqtree/iqtree2/releases/download/v2.3.6/iqtree-2.3.6-Linux-intel.tar.gz" | tar -zx && \
+    wget -qO- "https://github.com/iqtree/iqtree2/releases/download/v2.4.0/iqtree-2.4.0-Linux-intel.tar.gz" | tar -zx && \
     sudo mv iqtree-*/bin/iqtree2 /usr/local/bin/iqtree2 && \
     rm -rf iqtree-* && \
 
     # install kallisto
-    wget -qO- "https://github.com/pachterlab/kallisto/releases/download/v0.51.1/kallisto_linux-v0.51.1.tar.gz" | tar -zx && \
+    wget -qO- "https://github.com/pachterlab/kallisto/releases/download/v0.52.0/kallisto_linux-v0.52.0.tar.gz" | tar -zx && \
     sudo mv kallisto/kallisto /usr/local/bin/kallisto && \
     rm -rf kallisto && \
 
@@ -78,7 +78,7 @@ RUN sudo apt-get update && sudo apt-get upgrade -y && \
     rm -rf mafft* && \
 
     # install Minimap2
-    wget -qO- "https://github.com/lh3/minimap2/releases/download/v2.28/minimap2-2.28_x64-linux.tar.bz2" | tar -xj && \
+    wget -qO- "https://github.com/lh3/minimap2/releases/download/v2.31/minimap2-2.31_x64-linux.tar.bz2" | tar -xj && \
     sudo mv minimap2-*/minimap2 /usr/local/bin/minimap2 && \
     rm -rf minimap2-* && \
 
@@ -105,7 +105,7 @@ RUN sudo apt-get update && sudo apt-get upgrade -y && \
     # install RAxML-NG
     mkdir -p raxml && \
     cd raxml && \
-    wget "https://github.com/amkozlov/raxml-ng/releases/download/1.2.2/raxml-ng_v1.2.2_linux_x86_64.zip" && \
+    wget "https://github.com/amkozlov/raxml-ng/releases/download/2.0.3/raxml-ng_v2.0.3_linux_x86_64.zip" && \
     unzip raxml*.zip && \
     sudo mv raxml-ng /usr/local/bin/ && \
     cd .. && \
@@ -120,7 +120,7 @@ RUN sudo apt-get update && sudo apt-get upgrade -y && \
     rm -rf RSEM-* && \
 
     # install Salmon
-    wget -qO- "https://github.com/COMBINE-lab/salmon/archive/refs/tags/v1.10.1.tar.gz" | tar -zx && \
+    wget -qO- "https://github.com/COMBINE-lab/salmon/archive/refs/tags/v2.8.0.tar.gz" | tar -zx && \
     cd salmon-* && \
     cmake -DCMAKE_INSTALL_PREFIX=/usr/local/ . && \
     make && \
@@ -129,7 +129,7 @@ RUN sudo apt-get update && sudo apt-get upgrade -y && \
     rm -rf salmon-* && \
 
     # install samtools
-    wget -qO- "https://github.com/samtools/samtools/releases/download/1.21/samtools-1.21.tar.bz2" | tar -xj && \
+    wget -qO- "https://github.com/samtools/samtools/releases/download/1.24/samtools-1.24.tar.bz2" | tar -xj && \
     cd samtools-* && \
     ./configure --prefix=/usr/local --without-curses && \
     make && \
@@ -138,7 +138,7 @@ RUN sudo apt-get update && sudo apt-get upgrade -y && \
     rm -rf samtools-* && \
 
     # install SPAdes
-    wget -qO- "https://github.com/ablab/spades/releases/download/v4.0.0/SPAdes-4.0.0-Linux.tar.gz" | tar -zx && \
+    wget -qO- "https://github.com/ablab/spades/releases/download/v4.3.0/SPAdes-4.3.0-Linux.tar.gz" | tar -zx && \
     sudo mv SPAdes-*/bin/* /usr/local/bin/ && \
     sudo mv SPAdes-*/share/* /usr/local/share/ && \
     rm -rf SPAdes-* && \
@@ -150,7 +150,7 @@ RUN sudo apt-get update && sudo apt-get upgrade -y && \
     rm -rf STAR_* && \
 
     # install tn93
-    wget -qO- "https://github.com/veg/tn93/archive/refs/tags/v1.0.14.tar.gz" | tar -zx && \
+    wget -qO- "https://github.com/veg/tn93/archive/refs/tags/v1.0.17.tar.gz" | tar -zx && \
     cd tn93-* && \
     cmake -DCMAKE_INSTALL_PREFIX=/usr/local/ . && \
     make && \
@@ -159,12 +159,12 @@ RUN sudo apt-get update && sudo apt-get upgrade -y && \
     rm -rf tn93-* && \
 
     # install TreeCluster
-    wget -qO- "https://github.com/niemasd/TreeCluster/archive/refs/tags/1.0.3.tar.gz" | tar -zx && \
+    wget -qO- "https://github.com/niemasd/TreeCluster/archive/refs/tags/1.0.5.tar.gz" | tar -zx && \
     sudo mv TreeCluster-*/TreeCluster.py /usr/local/bin/ && \
     rm -rf TreeCluster-* && \
 
     # install ViralConsensus
-    wget -qO- "https://github.com/niemasd/ViralConsensus/archive/refs/tags/0.0.6.tar.gz" | tar -zx && \
+    wget -qO- "https://github.com/niemasd/ViralConsensus/archive/refs/tags/1.0.4.tar.gz" | tar -zx && \
     cd ViralConsensus-* && \
     make && \
     sudo mv viral_consensus /usr/local/bin/viral_consensus && \
@@ -172,7 +172,7 @@ RUN sudo apt-get update && sudo apt-get upgrade -y && \
     rm -rf ViralConsensus-* && \
 
     # install ViralMSA
-    sudo wget -O /usr/local/bin/ViralMSA.py "https://github.com/niemasd/ViralMSA/releases/download/1.1.44/ViralMSA.py" && \
+    sudo wget -O /usr/local/bin/ViralMSA.py "https://github.com/niemasd/ViralMSA/releases/download/1.1.49/ViralMSA.py" && \
     sudo chmod a+x /usr/local/bin/ViralMSA.py && \
 
     # clean up
