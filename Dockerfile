@@ -53,9 +53,9 @@ RUN sudo apt-get update && sudo apt-get upgrade -y && \
     cd .. && \
     rm -rf hisat2-* && \
 
-    # install IQ-TREE 2
-    wget -qO- "https://github.com/iqtree/iqtree2/releases/download/v2.4.0/iqtree-2.4.0-Linux-intel.tar.gz" | tar -zx && \
-    sudo mv iqtree-*/bin/iqtree2 /usr/local/bin/iqtree2 && \
+    # install IQ-TREE 3
+    wget -qO- "https://github.com/iqtree/iqtree3/releases/download/v3.1.4/iqtree-3.1.4-Linux.tar.gz" | tar -zx && \
+    sudo mv iqtree-*/bin/* /usr/local/bin/ && \
     rm -rf iqtree-* && \
 
     # install kallisto
