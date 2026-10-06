@@ -31,7 +31,7 @@ RUN sudo apt-get update && sudo apt-get upgrade -y && \
     rm -rf bwa-* && \
 
     # install fastp
-    sudo wget -O /usr/local/bin/fastp "http://opengene.org/fastp/fastp.1.3.7" && \
+    sudo wget -qO /usr/local/bin/fastp "http://opengene.org/fastp/fastp.1.3.7" && \
     sudo chmod a+x /usr/local/bin/fastp && \
 
     # install FastTree
@@ -69,7 +69,7 @@ RUN sudo apt-get update && sudo apt-get upgrade -y && \
     rm -rf lofreq_star-* && \
 
     # install LSD2
-    sudo wget -O /usr/local/bin/lsd2 "https://github.com/tothuhien/lsd2/releases/download/v.2.4.1/lsd2_unix" && \
+    sudo wget -qO /usr/local/bin/lsd2 "https://github.com/tothuhien/lsd2/releases/download/v.2.4.1/lsd2_unix" && \
     sudo chmod a+x /usr/local/bin/lsd2 && \
 
     # install MAFFT
@@ -88,7 +88,7 @@ RUN sudo apt-get update && sudo apt-get upgrade -y && \
     rm -rf newick-utils-* && \
 
     # install Prodigal
-    sudo wget -O /usr/local/bin/prodigal "https://github.com/hyattpd/Prodigal/releases/download/v2.6.3/prodigal.linux" && \
+    sudo wget -qO /usr/local/bin/prodigal "https://github.com/hyattpd/Prodigal/releases/download/v2.6.3/prodigal.linux" && \
     sudo chmod a+x /usr/local/bin/prodigal && \
 
     # install Quack
@@ -106,6 +106,10 @@ RUN sudo apt-get update && sudo apt-get upgrade -y && \
     sudo python3 setup.py install && \
     cd .. && \
     sudo rm -rf quast-* && \
+
+    # install rammap
+    sudo wget -qO /usr/local/bin/rammap "https://github.com/jwanglab/rammap/releases/download/v1.1.3/rammap_x86_64-unknown-linux-gnu_v1.1.3" && \
+    sudo chmod a+x /usr/local/bin/rammap && \
 
     # install RAxML-NG
     mkdir -p raxml && \
@@ -173,7 +177,7 @@ RUN sudo apt-get update && sudo apt-get upgrade -y && \
     rm -rf ViralConsensus-* && \
 
     # install ViralMSA
-    sudo wget -O /usr/local/bin/ViralMSA.py "https://github.com/niemasd/ViralMSA/releases/download/1.1.49/ViralMSA.py" && \
+    sudo wget -qO /usr/local/bin/ViralMSA.py "https://github.com/niemasd/ViralMSA/releases/download/1.1.49/ViralMSA.py" && \
     sudo chmod a+x /usr/local/bin/ViralMSA.py && \
 
     # clean up
