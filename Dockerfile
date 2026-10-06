@@ -1,7 +1,7 @@
 FROM codercom/code-server:latest
 RUN sudo apt-get update && sudo apt-get upgrade -y && \
     # install general dependencies
-    sudo apt-get install -y --no-install-recommends bc bison bzip2 cmake flex libboost-all-dev libbz2-dev libcurl4-openssl-dev libeigen3-dev liblzma-dev g++ gcc git make perl-doc python-is-python3 python3 python3-pip unzip xz-utils zlib1g-dev && \
+    sudo apt-get install -y --no-install-recommends bc bison bzip2 cmake flex git libboost-all-dev libbz2-dev libcurl4-openssl-dev libeigen3-dev liblzma-dev g++ gcc git make perl-doc python-is-python3 python3 python3-pip unzip xz-utils zlib1g-dev && \
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib && \
 
     # install Python packages
@@ -92,8 +92,13 @@ RUN sudo apt-get update && sudo apt-get upgrade -y && \
     sudo chmod a+x /usr/local/bin/prodigal && \
 
     # install Quack
-    sudo wget -O /usr/local/bin/quack "https://github.com/IGBB/quack/releases/download/1.2.1/linux.quack" && \
-    sudo chmod a+x /usr/local/bin/quack && \
+    wget -qO- "https://github.com/IGBB/quack/archive/refs/tags/v2.0.tar.gz" | tar -zx && \
+    cd quack-* && \
+    git clone https://github.com/attractivechaos/klib.git && \
+    make quack && \
+    sudo mv quack /usr/local/bin/ && \
+    cd .. && \
+    rm -rf quack-* && \
 
     # install QUAST
     wget -qO- "https://github.com/ablab/quast/releases/download/quast_5.3.0/quast-5.3.0.tar.gz" | tar -zx && \
