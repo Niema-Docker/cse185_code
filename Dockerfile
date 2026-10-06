@@ -120,13 +120,7 @@ RUN sudo apt-get update && sudo apt-get upgrade -y && \
     rm -rf RSEM-* && \
 
     # install Salmon
-    wget -qO- "https://github.com/COMBINE-lab/salmon/archive/refs/tags/v2.8.0.tar.gz" | tar -zx && \
-    cd salmon-* && \
-    cmake -DCMAKE_INSTALL_PREFIX=/usr/local/ . && \
-    make && \
-    sudo make install && \
-    cd .. && \
-    rm -rf salmon-* && \
+    wget -qO- "https://github.com/COMBINE-lab/salmon/releases/latest/download/salmon-cli-installer.sh" | bash
 
     # install samtools
     wget -qO- "https://github.com/samtools/samtools/releases/download/1.24/samtools-1.24.tar.bz2" | tar -xj && \
