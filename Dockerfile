@@ -14,7 +14,7 @@ RUN sudo apt-get update && \
     sudo make install && \
     cd .. && \
     rm -rf htslib-* && \
-    ldconfig && \
+    sudo ldconfig && \
 
     # install Bowtie2
     wget "https://github.com/BenLangmead/bowtie2/releases/download/v2.5.5/bowtie2-2.5.5-linux-x86_64.zip" && \
