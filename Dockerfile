@@ -1,5 +1,5 @@
 FROM codercom/code-server:latest
-RUN sudo apt-get update && sudo apt-get upgrade -y && \
+RUN sudo apt-get update && \
     # install general dependencies
     sudo apt-get install -y --no-install-recommends bc bison bzip2 cmake flex git libboost-all-dev libbz2-dev libcurl4-openssl-dev libeigen3-dev liblzma-dev g++ gcc git make perl-doc python-is-python3 python3 python3-pip time unzip wget xz-utils zlib1g-dev && \
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib && \
@@ -11,10 +11,10 @@ RUN sudo apt-get update && sudo apt-get upgrade -y && \
     wget -qO- "https://github.com/samtools/htslib/releases/download/1.24/htslib-1.24.tar.bz2" | tar -xj && \
     cd htslib-* && \
     ./configure && \
-    make && \
     sudo make install && \
     cd .. && \
     rm -rf htslib-* && \
+    ldconfig && \
 
     # install Bowtie2
     wget "https://github.com/BenLangmead/bowtie2/releases/download/v2.5.5/bowtie2-2.5.5-linux-x86_64.zip" && \
@@ -108,7 +108,7 @@ RUN sudo apt-get update && sudo apt-get upgrade -y && \
     sudo rm -rf quast-* && \
 
     # install rammap
-    sudo wget -qO /usr/local/bin/rammap "https://github.com/jwanglab/rammap/releases/download/v1.1.3/rammap_x86_64-unknown-linux-gnu_v1.1.3" && \
+    sudo wget -qO /usr/local/bin/rammap "https://github.com/jwanglab/rammap/releases/download/v1.2.0/rammap_x86_64-unknown-linux-gnu_v1.2.0" && \
     sudo chmod a+x /usr/local/bin/rammap && \
 
     # install RAxML-NG
@@ -155,7 +155,7 @@ RUN sudo apt-get update && sudo apt-get upgrade -y && \
     rm -rf STAR_* && \
 
     # install tn93
-    wget -qO- "https://github.com/veg/tn93/archive/refs/tags/v1.0.17.tar.gz" | tar -zx && \
+    wget -qO- "https://github.com/veg/tn93/archive/refs/tags/v1.1.0.tar.gz" | tar -zx && \
     cd tn93-* && \
     cmake -DCMAKE_INSTALL_PREFIX=/usr/local/ . && \
     make && \
@@ -177,11 +177,10 @@ RUN sudo apt-get update && sudo apt-get upgrade -y && \
     rm -rf ViralConsensus-* && \
 
     # install ViralMSA
-    sudo wget -qO /usr/local/bin/ViralMSA.py "https://github.com/niemasd/ViralMSA/releases/download/1.1.49/ViralMSA.py" && \
+    sudo wget -qO /usr/local/bin/ViralMSA.py "https://github.com/niemasd/ViralMSA/releases/download/1.2.1/ViralMSA.py" && \
     sudo chmod a+x /usr/local/bin/ViralMSA.py && \
 
     # clean up
     sudo apt-get autoremove -y && \
     sudo apt-get purge -y --auto-remove && \
     sudo rm -rf /var/lib/apt/lists/*
-ENV LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib"
